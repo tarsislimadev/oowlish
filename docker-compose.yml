@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  node:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:3000"
+    depends_on:
+      - "db"
+    links:
+      - "db"
+  db:
+    image: mongo:4.4
