@@ -6,6 +6,9 @@ const logger = require('morgan');
 
 const app = express();
 
+require('./database');
+require('./install');
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
