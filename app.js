@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'build')));
 
-app.use('/api', require('./api'));
+app.use('/api', require('./api/routes'));
 
 app.use(function(req, res, next) {
   next(createError(404));
