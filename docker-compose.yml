@@ -5,11 +5,31 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: web
+    restart: unless-stopped
+    environment:
+      - DB_HOST=db
+      - DB_PORT=27017
+      - DB_NAME=oowlish
     ports:
       - "80:3000"
-    depends_on:
-      - "db"
     links:
-      - "db"
-  db:
+      - "mongo"
+    networks:
+      - oowlish-network
+
+  mongo:
     image: mongo:4.4
+    container_name: db
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_DATABASE=oowlish
+      - MONGO_PORT=27017
+    ports:
+      - "27017:27017"
+    networks:
+      - oowlish-network
+
+networks:
+  oowlish-network:
+    driver: bridge
