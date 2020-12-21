@@ -20,6 +20,8 @@ const CustomerSchema = new mongoose.Schema({
   company: String,
   city: String,
   title: String,
+  latitude: String,
+  longitude: String,
 });
 
 const Customer = mongoose.model("Customer", CustomerSchema);
