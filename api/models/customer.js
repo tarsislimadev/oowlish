@@ -1,32 +1,46 @@
-const mongoose = require('mongoose');
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../../database');
 
-const CustomerSchema = new mongoose.Schema({
+const Customer = sequelize.define('customer', {
   id: {
-    type: Number,
-    required: [true, ""],
+    type: DataTypes.NUMBER,
+    primaryKey: true,
+    allowNull: false,
   },
   first_name: {
-    type: String,
-    required: [true, ""],
+    type: DataTypes.STRING,
+    allowNull: false
   },
   last_name: {
-    type: String,
+    type: DataTypes.STRING
   },
   email: {
-    type: String,
-    required: [true, ""],
+    type: DataTypes.STRING,
+    allowNull: false
   },
-  gender: String,
-  company: String,
-  city: String,
-  title: String,
-  latitude: String,
-  longitude: String,
+  gender: {
+    type: DataTypes.STRING
+  },
+  company: {
+    type: DataTypes.STRING
+  },
+  city: {
+    type: DataTypes.STRING
+  },
+  title: {
+    type: DataTypes.STRING
+  },
+  latitude: {
+    type: DataTypes.STRING
+  },
+  longitude: {
+    type: DataTypes.STRING
+  },
+}, {
+  createdAt: false,
+  updatedAt: false,
 });
 
-const Customer = mongoose.model("Customer", CustomerSchema);
-
 module.exports = {
-  CustomerSchema,
   Customer,
 };

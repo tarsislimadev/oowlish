@@ -7,8 +7,7 @@ const migrate_db = async () => {
     const customer_data = customers_data[c];
     customer_data["latitude"] = '';
     customer_data["longitude"] = '';
-    const customer = new Customer(customer_data);
-    await customer.save();
+    await Customer.create(customer_data);
   }
   console.log("Database OK");
 };

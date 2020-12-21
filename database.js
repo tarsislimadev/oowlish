@@ -1,10 +1,10 @@
-const mongoose = require("mongoose");
-const { mongo } = require("./config");
+const { database } = require("./config");
+const { Sequelize } = require('sequelize');
 
-mongoose.connect(
-  `mongodb://${mongo.host}:${mongo.port}/${mongo.database}`,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-);
+module.exports.sequelize = new Sequelize(
+  database.database, 
+  database.user, 
+  database.password, {
+  host: database.host,
+  dialect: 'mariadb',
+});
