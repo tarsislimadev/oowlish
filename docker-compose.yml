@@ -1,11 +1,24 @@
 version: "3"
 
 services:
-  node:
+  # frontend: 
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   container_name: frontend
+  #   restart: unless-stopped
+  #   volumes: 
+  #     - ./frontend:/app
+  #   ports:
+  #     - "80:3000"
+  #   depends_on: 
+  #     - backend
+
+  backend:
     build:
-      context: .
+      context: ./backend/
       dockerfile: Dockerfile
-    container_name: web
+    container_name: backend
     restart: unless-stopped
     environment:
       - DB_HOST=db
@@ -14,13 +27,17 @@ services:
       - DB_USER=oowlish
       - DB_PASSWORD=oowlish
     ports:
-      - "80:3000"
+      - "8080:8000"
+    volumes:
+      - ./backend:/backend
     links:
-      - "mariadb"
+      - "database"
+    depends_on:
+      - "database"
     networks:
       - oowlish-network
 
-  mariadb:
+  database:
     image: mariadb:10.5
     container_name: db
     restart: unless-stopped
@@ -30,7 +47,7 @@ services:
       - MYSQL_USER=oowlish
       - MYSQL_PASSWORD=oowlish
     volumes:
-      - ./data/create_schema.sql:/docker-entrypoint-initdb.d/create_schema.sql
+      - ./database/create_schema.sql:/docker-entrypoint-initdb.d/create_schema.sql
     ports:
       - "3306:3306"
     networks:

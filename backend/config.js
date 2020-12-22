@@ -1,4 +1,7 @@
 module.exports = {
+  web: {
+    port: process.env.PORT || "8000",
+  },
   database: {
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
