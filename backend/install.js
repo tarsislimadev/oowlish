@@ -1,4 +1,4 @@
-const customers_data = require("./data/customers.json");
+const customers_data = require("./migrations/customers.json");
 const { Customer } = require("./api/models");
 
 const db_connection = async () => {
