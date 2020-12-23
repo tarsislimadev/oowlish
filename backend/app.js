@@ -5,7 +5,6 @@ const cors = require('cors');
 const app = express();
 
 require('./database');
-require('./install');
 
 app.use(logger('dev'));
 app.use(express.json());

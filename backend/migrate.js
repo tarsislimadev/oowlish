@@ -1,6 +1,8 @@
 const customers_data = require("./migrations/customers.json");
 const { Customer } = require("./api/models");
 
+require('./database');
+
 const db_connection = async () => {
   let ok = false;
   do {
