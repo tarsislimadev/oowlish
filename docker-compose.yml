@@ -9,6 +9,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./frontend:/app
+      - ./logs/frontend:/root/.npm/_logs/
     ports:
       - "80:3000"
     depends_on:
@@ -30,6 +31,7 @@ services:
       - "8080:8000"
     volumes:
       - ./backend:/backend
+      - ./logs/backend:/root/.npm/_logs/
     links:
       - "database"
     depends_on:
