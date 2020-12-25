@@ -24,28 +24,28 @@ export class Customers extends Component {
 
   render() {
     const { loading, title, customers } = this.state;
-    console.log('customers', customers);
 
     return (
       <>
         <h2>{title}</h2>
-        {
-          loading ?
-            <p>Loading...</p> :
-            customers.map((customer, index) => this.cardCustomer(customer, index))
-        }
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          customers.map((customer, index) => this.cardCustomer(customer, index))
+        )}
       </>
     );
   }
 
   loadCustomers = async () => {
     const { city } = this.state;
-    customersByCity({ city })
-      .then((customers) => this.setState({ customers, loading: false, }));
+    customersByCity({ city }).then((customers) =>
+      this.setState({ customers, loading: false })
+    );
   };
 
   cardCustomer = (customer, index) => {
-    const { id, first_name, last_name, } = customer;
+    const { id, first_name, last_name } = customer;
 
     return (
       <Card className="card" key={index}>
@@ -59,5 +59,5 @@ export class Customers extends Component {
         </Card.Body>
       </Card>
     );
-  }
+  };
 }
