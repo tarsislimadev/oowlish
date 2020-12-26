@@ -48,8 +48,6 @@ services:
       - MYSQL_DATABASE=oowlish
       - MYSQL_USER=oowlish
       - MYSQL_PASSWORD=oowlish
-    volumes:
-      - ./database/create_schema.sql:/docker-entrypoint-initdb.d/create_schema.sql
     ports:
       - "3306:3306"
     networks:
