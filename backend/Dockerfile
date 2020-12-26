@@ -8,6 +8,6 @@ WORKDIR /backend
 
 RUN npm install
 
-CMD [ "node", "." ]
+CMD [ "npm", "start" ]
 
-EXPOSE 3000
+EXPOSE 8000
