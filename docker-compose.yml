@@ -1,58 +1,22 @@
-version: "3"
+version: '3'
 
 services:
   frontend:
-    build:
-      context: ./frontend/
-      dockerfile: Dockerfile
-    container_name: frontend
-    restart: unless-stopped
-    volumes:
-      - ./frontend:/app
-      - ./logs/frontend:/root/.npm/_logs/
+    build: './src/frontend'
     ports:
-      - "80:3000"
-    depends_on:
-      - backend
+      - '80:3000'
 
   backend:
-    build:
-      context: ./backend/
-      dockerfile: Dockerfile
-    container_name: backend
-    restart: unless-stopped
-    environment:
-      - DB_HOST=db
-      - DB_PORT=3306
-      - DB_NAME=oowlish
-      - DB_USER=oowlish
-      - DB_PASSWORD=oowlish
+    build: './src/backend'
     ports:
-      - "8080:8000"
-    volumes:
-      - ./backend:/backend
-      - ./logs/backend:/root/.npm/_logs/
-    links:
-      - "database"
-    depends_on:
-      - "database"
-    networks:
-      - oowlish-network
+      - '8080:8000'
 
-  database:
-    image: mariadb:10.5
-    container_name: db
-    restart: unless-stopped
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=oowlish
-      - MYSQL_USER=oowlish
-      - MYSQL_PASSWORD=oowlish
-    ports:
-      - "3306:3306"
-    networks:
-      - oowlish-network
-
-networks:
-  oowlish-network:
-    driver: bridge
+  # database:
+  #   image: mariadb:10.5
+  #   environment:
+  #     - 'MYSQL_ROOT_PASSWORD=root'
+  #     - 'MYSQL_DATABASE=oowlish'
+  #     - 'MYSQL_USER=oowlish'
+  #     - 'MYSQL_PASSWORD=oowlish'
+  #   ports:
+  #     - '3306:3306'
